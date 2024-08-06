@@ -16,9 +16,9 @@ default_args = {
 }
     
 dag = DAG(
-    'weither',
+    'weather',
     default_args=default_args,
-    description='daily weither data',
+    description='daily weather data',
     schedule_interval='@daily',
     start_date=days_ago(1),
     catchup=False,
