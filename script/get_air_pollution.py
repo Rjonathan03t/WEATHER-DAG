@@ -5,10 +5,10 @@ from datetime import datetime
 
 def get_air_pollution_data(lat, lon, api_key):
     url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
-    headers = {'User-Agent': 'My Python App'}
+    
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url)
         response.raise_for_status()
         data = response.json()
         return data
