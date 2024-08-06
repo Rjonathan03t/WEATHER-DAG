@@ -1,6 +1,7 @@
 import requests
 import csv
 import json
+from datetime import datetime
 
 def get_air_pollution_data(lat, lon, api_key):
     url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
@@ -74,7 +75,7 @@ def save_data_to_csv(data, filename):
                 ])
 
 def main():
-    api_key = '4cbf2ec40fa4073d64fa831d6efcef60'  # Remplacez par votre clé API valide
+    api_key = '4cbf2ec40fa4073d64fa831d6efcef60'  
     geographic_filename = 'Geographic_Data.csv'
     demographic_filename = 'Demographic_Data.csv'
     
@@ -84,13 +85,16 @@ def main():
     all_data = []
     for location, geo_info in geographic_data.items():
         # Utiliser des coordonnées fictives si pas disponibles
-        latitude, longitude = '0', '0'  # Valeurs par défaut si pas de coordonnées réelles
+        latitude, longitude = '0', '0'  
         air_pollution_data = get_air_pollution_data(latitude, longitude, api_key)
         
         if air_pollution_data:
+            timestamp = air_pollution_data['list'][0].get('dt', 'N/A')
+            date_time = datetime.utcfromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+            
             entry = {
                 'Location': location,
-                'Timestamp': air_pollution_data['list'][0].get('dt', 'N/A'),
+                'Timestamp': date_time,
                 'AQI': air_pollution_data['list'][0]['main'].get('aqi', 'N/A'),
                 'CO': air_pollution_data['list'][0]['components'].get('co', 'N/A'),
                 'NO': air_pollution_data['list'][0]['components'].get('no', 'N/A'),
