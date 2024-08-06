@@ -1,2 +1,2 @@
-Timestamp,AQI,CO,NO,NO2,O3,SO2,PM2.5,PM10,NH3
-1722964056,2,233.65,0.48,3.94,77.96,1.06,1.61,2.32,1.57
+Location,Timestamp,AQI,CO,NO,NO2,O3,SO2,PM2.5,PM10,NH3,Altitude (m),Proximity to Industry (km),Population,Density (people/km²),Urbanization (%),Average Income (USD),Education Level (%)
+Lima,1722965464,1,270.37,1.59,4.67,58.65,4.11,4.24,13.22,1.82,1540,1.5,9674755,N/A,81,4500,15
