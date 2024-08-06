@@ -1,16 +1,12 @@
-import sys
-import os
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator # type: ignore
 from airflow.utils.dates import days_ago
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../scripts')))
-
 
 # Importing the task functions
-from extract import extract_data
-from transform import transform_data
-from load import load_data
+from script.extract import extract_data
+from script.transform import transform_data
+from script.load import load_data
 
 default_args = {
     'owner': 'airflow',
