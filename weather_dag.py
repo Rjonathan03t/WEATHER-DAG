@@ -1,6 +1,11 @@
+import sys
+import os
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator # type: ignore
 from airflow.utils.dates import days_ago
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../scripts')))
+
 
 # Importing the task functions
 from extract import extract_data
