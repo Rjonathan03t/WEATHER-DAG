@@ -24,7 +24,6 @@ def load_geographic_data(filename):
             geographic_data[location] = {
                 'altitude': row['Altitude (m)'],
                 'proximity': row['Proximity to Industry (km)']
-                # Pas de latitude ni longitude
             }
     return geographic_data
 
@@ -45,7 +44,7 @@ def load_demographic_data(filename):
 
 def save_data_to_csv(data, filename):
     if data:
-        with open(filename, 'w', newline='') as file:
+        with open(filename, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow([
                 'Location', 'Timestamp', 'AQI', 'CO', 'NO', 'NO2', 'O3', 'SO2', 'PM2.5', 'PM10', 'NH3',
@@ -53,10 +52,29 @@ def save_data_to_csv(data, filename):
                 'Urbanization (%)', 'Average Income (USD)', 'Education Level (%)'
             ])
             for entry in data:
-                writer.writerow(entry)
+                writer.writerow([
+                    entry.get('Location', 'N/A'),
+                    entry.get('Timestamp', 'N/A'),
+                    entry.get('AQI', 'N/A'),
+                    entry.get('CO', 'N/A'),
+                    entry.get('NO', 'N/A'),
+                    entry.get('NO2', 'N/A'),
+                    entry.get('O3', 'N/A'),
+                    entry.get('SO2', 'N/A'),
+                    entry.get('PM2.5', 'N/A'),
+                    entry.get('PM10', 'N/A'),
+                    entry.get('NH3', 'N/A'),
+                    entry.get('Altitude (m)', 'N/A'),
+                    entry.get('Proximity to Industry (km)', 'N/A'),
+                    entry.get('Population', 'N/A'),
+                    entry.get('Density (people/km²)', 'N/A'),
+                    entry.get('Urbanization (%)', 'N/A'),
+                    entry.get('Average Income (USD)', 'N/A'),
+                    entry.get('Education Level (%)', 'N/A')
+                ])
 
 def main():
-    api_key = '4cbf2ec40fa4073d64fa831d6efcef60' 
+    api_key = '4cbf2ec40fa4073d64fa831d6efcef60'  # Remplacez par votre clé API valide
     geographic_filename = 'Geographic_Data.csv'
     demographic_filename = 'Demographic_Data.csv'
     
@@ -66,14 +84,14 @@ def main():
     all_data = []
     for location, geo_info in geographic_data.items():
         # Utiliser des coordonnées fictives si pas disponibles
-        latitude, longitude = '0', '0'  # Valeurs par défaut
+        latitude, longitude = '0', '0'  # Valeurs par défaut si pas de coordonnées réelles
         air_pollution_data = get_air_pollution_data(latitude, longitude, api_key)
         
         if air_pollution_data:
             entry = {
                 'Location': location,
-                'Timestamp': air_pollution_data['list'][0]['dt'],
-                'AQI': air_pollution_data['list'][0]['main']['aqi'],
+                'Timestamp': air_pollution_data['list'][0].get('dt', 'N/A'),
+                'AQI': air_pollution_data['list'][0]['main'].get('aqi', 'N/A'),
                 'CO': air_pollution_data['list'][0]['components'].get('co', 'N/A'),
                 'NO': air_pollution_data['list'][0]['components'].get('no', 'N/A'),
                 'NO2': air_pollution_data['list'][0]['components'].get('no2', 'N/A'),
