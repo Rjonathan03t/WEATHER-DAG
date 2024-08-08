@@ -21,7 +21,7 @@ def analyze_correlations(df):
     # Calculer les corrélations
     correlations = numeric_df.corr()
     
-
+    # Afficher les corrélations
     print("Corrélations entre les niveaux de pollution et les facteurs démographiques et géographiques:")
     print(correlations)
     
@@ -31,8 +31,40 @@ def analyze_correlations(df):
     plt.title('Corrélations entre les niveaux de pollution et les facteurs démographiques et géographiques')
     plt.show()
 
-
+# 2. Analyse des Tendances
+def analyze_trends(df):
+    # Visualiser les tendances des niveaux de AQI en fonction de l'altitude
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=df, x='Altitude (m)', y='AQI')
+    plt.title('Tendance du AQI en fonction de l\'altitude')
+    plt.xlabel('Altitude (m)')
+    plt.ylabel('AQI')
+    plt.show()
+    
+    # Visualiser les tendances des niveaux de AQI en fonction de la proximité des industries
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=df, x='Proximity to Industry (km)', y='AQI')
+    plt.title('Tendance du AQI en fonction de la proximité des industries')
+    plt.xlabel('Proximité aux industries (km)')
+    plt.ylabel('AQI')
+    plt.show()
+    
+    # Visualiser les tendances des niveaux de AQI en fonction de la densité de population
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=df, x='Density (people/km²)', y='AQI')
+    plt.title('Tendance du AQI en fonction de la densité de population')
+    plt.xlabel('Densité (personnes/km²)')
+    plt.ylabel('AQI')
+    plt.show()
+    
+    # Visualiser les tendances des niveaux de AQI en fonction du revenu moyen
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=df, x='Average Income (USD)', y='AQI')
+    plt.title('Tendance du AQI en fonction du revenu moyen')
+    plt.xlabel('Revenu moyen (USD)')
+    plt.ylabel('AQI')
+    plt.show()
 
 if __name__ == "__main__":
     analyze_correlations(df)
- 
+    analyze_trends(df)
