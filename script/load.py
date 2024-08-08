@@ -1,5 +1,8 @@
 import pandas as pd
 
+ #chacun change le path localement
+basePath = '/home/nathan/airflow/weather/dags/data/raw/'
+
 def load_data():
-    df = pd.read_csv('/home/nathan/airflow/weather/dags/data/raw/pollution.csv')
-    df.to_csv('/home/nathan/airflow/weather/dags/data/raw/pollution.csv', index=False)
+    df = pd.read_csv(f'{basePath}pollution.csv')
+    df.to_csv(f'{basePath}pollution.csv', index=False)

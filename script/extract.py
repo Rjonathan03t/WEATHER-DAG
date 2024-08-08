@@ -2,6 +2,8 @@ import pandas as pd
 import requests
 
 api_key = "4cbf2ec40fa4073d64fa831d6efcef60"
+#chacun change le path localement
+basePath = '/home/nathan/airflow/weather/dags/data/raw/'
 
 def get_coordinates(city):
     geocode_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid={api_key}"
@@ -18,4 +20,4 @@ def get_air_pollution_data(lat, lon):
     return response.json()
 
 def extract_data():
-     pd.read_csv('/home/nathan/airflow/weather/dags/data/raw/Geographic_Data.csv') 
+     pd.read_csv(f'{basePath}Geographic_Data.csv') 

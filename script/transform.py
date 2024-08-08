@@ -6,9 +6,11 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from extract import get_coordinates, get_air_pollution_data
 
+ #chacun change le path localement
+basePath = '/home/nathan/airflow/weather/dags/data/raw/'
 
 def transform_data():
-    df = pd.read_csv('/home/nathan/airflow/weather/dags/data/raw/Geographic_Data.csv')  
+    df = pd.read_csv(f'{basePath}Geographic_Data.csv')  
     df['AQI'] = None
     df['CO'] = None
     df['NO'] = None
@@ -37,4 +39,4 @@ def transform_data():
                     df.at[index, 'PM10'] = components['pm10']
                     df.at[index, 'NH3'] = components['nh3']
 
-    df.to_csv('/home/nathan/airflow/weather/dags/data/raw/pollution.csv', index=False)  
+    df.to_csv(f'{basePath}pollution.csv', index=False)  
