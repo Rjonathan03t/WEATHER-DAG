@@ -1,5 +1,6 @@
 import pandas as pd
 import requests
+import os
 
 api_key = "4cbf2ec40fa4073d64fa831d6efcef60"
 
@@ -18,4 +19,7 @@ def get_air_pollution_data(lat, lon):
     return response.json()
 
 def extract_data():
-     pd.read_csv('/home/nathan/airflow/weather/dags/data/raw/Geographic_Data.csv') 
+    # Définir le chemin relatif basé sur le répertoire du script
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, '../data/raw/Geographic_Data.csv')
+    return pd.read_csv(file_path)

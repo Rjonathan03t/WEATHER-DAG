@@ -1,14 +1,17 @@
 import sys
 import os
-
 import pandas as pd
+
+# Ajouter le répertoire de script au chemin
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from extract import get_coordinates, get_air_pollution_data
 
-
 def transform_data():
-    df = pd.read_csv('/home/nathan/airflow/weather/dags/data/raw/Geographic_Data.csv')  
+    # Définir le chemin relatif basé sur le répertoire du script
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, '../data/raw/Geographic_Data.csv')
+    df = pd.read_csv(file_path)
     df['AQI'] = None
     df['CO'] = None
     df['NO'] = None
@@ -37,4 +40,5 @@ def transform_data():
                     df.at[index, 'PM10'] = components['pm10']
                     df.at[index, 'NH3'] = components['nh3']
 
-    df.to_csv('/home/nathan/airflow/weather/dags/data/raw/pollution.csv', index=False)  
+    output_path = os.path.join(base_dir, '../data/raw/pollution.csv')
+    df.to_csv(output_path, index=False)
