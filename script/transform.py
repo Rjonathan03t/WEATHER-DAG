@@ -1,5 +1,13 @@
+
+
+import sys
+import os
+
 import pandas as pd
-from script.extract import get_coordinates, get_air_pollution_data
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from extract import get_coordinates, get_air_pollution_data
+
 
 def transform_data():
     df = pd.read_csv('/tmp/geo_temp.csv')  # Lire le fichier temporaire
