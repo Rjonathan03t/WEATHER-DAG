@@ -17,6 +17,5 @@ def get_air_pollution_data(lat, lon):
     response = requests.get(pollution_url)
     return response.json()
 
-def extract_data(file_path):
-    df = pd.read_csv(file_path)
-    df.to_csv('/tmp/geo_temp.csv', index=False)
+def extract_data():
+     pd.read_csv('/home/nathan/airflow/weather/dags/data/raw/Geographic_Data.csv') 

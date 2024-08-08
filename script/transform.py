@@ -1,5 +1,3 @@
-
-
 import sys
 import os
 
@@ -10,7 +8,7 @@ from extract import get_coordinates, get_air_pollution_data
 
 
 def transform_data():
-    df = pd.read_csv('/tmp/geo_temp.csv')  # Lire le fichier temporaire
+    df = pd.read_csv('/home/nathan/airflow/weather/dags/data/raw/Geographic_Data.csv')  
     df['AQI'] = None
     df['CO'] = None
     df['NO'] = None
@@ -39,4 +37,4 @@ def transform_data():
                     df.at[index, 'PM10'] = components['pm10']
                     df.at[index, 'NH3'] = components['nh3']
 
-    df.to_csv('/tmp/geo_transformed_temp.csv', index=False)  # Enregistrer temporairement le fichier transformé
+    df.to_csv('/home/nathan/airflow/weather/dags/data/raw/pollution.csv', index=False)  

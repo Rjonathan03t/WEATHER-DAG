@@ -2,7 +2,6 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator # type: ignore
 from airflow.utils.dates import days_ago
 
-# Importing the task functions
 from script.extract import extract_data
 from script.transform import transform_data
 from script.load import load_data
@@ -24,14 +23,10 @@ dag = DAG(
     catchup=False,
 )
 
-# Define the path to your file
-file_path = '/home/artiana/airflow/WEATHER-DAG/data/raw/Geographic_Data.csv'
 
-# Define the tasks with arguments
 extract_data_task = PythonOperator(
     task_id='extract_data',
     python_callable=extract_data,
-    op_args=[file_path],  # Pass the file path argument here
     dag=dag,
 )
 
@@ -47,5 +42,4 @@ load_task = PythonOperator(
     dag=dag,
 )
 
-# Set the task dependencies
 extract_data_task >> transform_task >> load_task
