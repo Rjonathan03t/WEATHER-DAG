@@ -1,3 +1,4 @@
+from datetime import timedelta
 from airflow.utils.task_group import TaskGroup
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator # type: ignore
@@ -21,7 +22,7 @@ dag = DAG(
     'weather',
     default_args=default_args,
     description='daily weather data',
-    schedule_interval='@hourly',
+    schedule_interval=timedelta(hours=2),
     start_date=days_ago(1),
     catchup=False,
 )
