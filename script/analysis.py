@@ -3,8 +3,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 
-pollution_file_path = '/home/artiana/airflow/WEATHER-DAG/data/raw/pollution.csv'
-demographic_file_path = '/home/artiana/airflow/WEATHER-DAG/data/raw/Demographic_Data.csv'
+pollution_file_path = '/home/nathan/airflow/weather/dags/data/raw/pollution.csv'
+demographic_file_path = '/home/nathan/airflow/weather/dags/data/raw/Demographic_Data.csv'
 
 # Charger les données depuis les fichiers CSV
 df_pollution = pd.read_csv(pollution_file_path)
