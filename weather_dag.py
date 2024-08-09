@@ -1,9 +1,11 @@
+from asyncio import TaskGroup
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator # type: ignore
 from airflow.utils.dates import days_ago
 
-from script.extract import extract_data
-from script.transform import transform_data
+from script.extract import extract_demographic
+from script.extract import extract_geographic
+from script.transform import merge_pollution_data_to_geographic_data
 from script.load import load_data
 
 default_args = {
@@ -24,15 +26,21 @@ dag = DAG(
 )
 
 
-extract_data_task = PythonOperator(
-    task_id='extract_data',
-    python_callable=extract_data,
-    dag=dag,
-)
+with TaskGroup("extract_tasks", dag=dag) as extract_tasks:
+    extract_demographic = PythonOperator(
+        task_id='extract_demographic',
+        python_callable=extract_demographic,
+    )
 
-transform_task = PythonOperator(
+    extract_geographic = PythonOperator(
+        task_id='extract_geographic',
+        python_callable=extract_geographic,
+    )
+
+
+merge_pollution_data_to_geographic_data = PythonOperator(
     task_id='transform_data',
-    python_callable=transform_data,
+    python_callable=merge_pollution_data_to_geographic_data,
     dag=dag,
 )
 
@@ -42,4 +50,4 @@ load_task = PythonOperator(
     dag=dag,
 )
 
-extract_data_task >> transform_task >> load_task
+extract_tasks >> merge_pollution_data_to_geographic_data >> load_task

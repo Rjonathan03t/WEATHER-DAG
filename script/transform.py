@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from extract import get_coordinates, get_air_pollution_data
 
 
-def transform_data():
+def merge_pollution_data_to_geographic_data():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, '../data/raw/Geographic_Data.csv')
     df = pd.read_csv(file_path)

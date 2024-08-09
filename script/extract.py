@@ -17,7 +17,12 @@ def get_air_pollution_data(lat, lon):
     response = requests.get(pollution_url)
     return response.json()
 
-def extract_data():
+def extract_geographic():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, '../data/raw/Geographic_Data.csv')
-    return pd.read_csv(file_path)
+    geo_file_path = os.path.join(base_dir, '../data/raw/Geographic_Data.csv')
+    return pd.read_csv(geo_file_path) 
+
+def extract_demographic():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    demo_file_path = os.path.join(base_dir, '../data/raw/Demographic_Data.csv')
+    return pd.read_csv(demo_file_path)
