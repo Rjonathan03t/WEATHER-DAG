@@ -2,28 +2,27 @@ import sys
 import os
 
 import pandas as pd
-import pendulum
+
+# Ajouter le répertoire de script au chemin
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from extract import get_coordinates, get_air_pollution_data
 
- #chacun change le path localement
-basePath = '/home/nathan/airflow/weather/dags/data/raw/'
 
 def transform_data():
-    Geographic_With_Pollution = pd.read_csv(f'{basePath}Geographic_Data.csv') 
-    Geographic_With_Pollution['Date'] = None 
-    Geographic_With_Pollution['AQI'] = None
-    Geographic_With_Pollution['CO'] = None
-    Geographic_With_Pollution['NO'] = None
-    Geographic_With_Pollution['NO2'] = None
-    Geographic_With_Pollution['O3'] = None
-    Geographic_With_Pollution['SO2'] = None
-    Geographic_With_Pollution['PM2_5'] = None
-    Geographic_With_Pollution['PM10'] = None
-    Geographic_With_Pollution['NH3'] = None
-
-    for index, row in Geographic_With_Pollution.iterrows():
+   
+    # Définir le chemin relatif basé sur le répertoire du script
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, '../data/raw/Geographic_Data.csv')
+    df = pd.read_csv(file_path)
+    df['AQI'] = None
+    df['CO'] = None
+    df['NO'] = None
+    df['SO2'] = None
+    df['PM2_5'] = None
+    df['PM10'] = None
+    df['NH3'] = None
+    for index, row in df.iterrows():
         city = row['Location']
         if pd.notna(city):
             lat, lon = get_coordinates(city)
@@ -31,15 +30,14 @@ def transform_data():
                 pollution_data = get_air_pollution_data(lat, lon)
                 if pollution_data and 'list' in pollution_data:
                     components = pollution_data['list'][0]['components']
-                    Geographic_With_Pollution.at[index, 'Date'] = pendulum.now().to_datetime_string()
-                    Geographic_With_Pollution.at[index, 'AQI'] = pollution_data['list'][0]['main']['aqi']
-                    Geographic_With_Pollution.at[index, 'CO'] = components['co']
-                    Geographic_With_Pollution.at[index, 'NO'] = components['no']
-                    Geographic_With_Pollution.at[index, 'NO2'] = components['no2']
-                    Geographic_With_Pollution.at[index, 'O3'] = components['o3']
-                    Geographic_With_Pollution.at[index, 'SO2'] = components['so2']
-                    Geographic_With_Pollution.at[index, 'PM2_5'] = components['pm2_5']
-                    Geographic_With_Pollution.at[index, 'PM10'] = components['pm10']
-                    Geographic_With_Pollution.at[index, 'NH3'] = components['nh3']
-
-    Geographic_With_Pollution.to_csv(f'{basePath}pollution.csv', index=False)  
+                    df.at[index, 'AQI'] = pollution_data['list'][0]['main']['aqi']
+                    df.at[index, 'CO'] = components['co']
+                    df.at[index, 'NO'] = components['no']
+                    df.at[index, 'NO2'] = components['no2']
+                    df.at[index, 'O3'] = components['o3']
+                    df.at[index, 'SO2'] = components['so2']
+                    df.at[index, 'PM2_5'] = components['pm2_5']
+                    df.at[index, 'PM10'] = components['pm10']
+                    df.at[index, 'NH3'] = components['nh3']  
+    output_path = os.path.join(base_dir, '../data/raw/pollution.csv')
+    df.to_csv(output_path, index=False)
