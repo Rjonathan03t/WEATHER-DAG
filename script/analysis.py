@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 import os
 
 
-pollution_file_path = '/home/artiana/airflow/WEATHER-DAG/data/raw/pollution.csv'
-demographic_file_path = '/home/artiana/airflow/WEATHER-DAG/data/raw/Demographic_Data.csv'
+base_dir = os.path.dirname(os.path.abspath(__file__))
+pollution_file_path = os.path.join(base_dir, '../data/raw/pollution.csv')
+demographic_file_path = os.path.join(base_dir, '../data/raw/Demographic_Data.csv')
+pd.read_csv(pollution_file_path)
 
 df_pollution = pd.read_csv(pollution_file_path)
 df_demographic = pd.read_csv(demographic_file_path)
