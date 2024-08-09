@@ -42,7 +42,7 @@ def merge_pollution_to_demographic():
                     Geographic_With_Pollution.at[index, 'PM2_5'] = components['pm2_5']
                     Geographic_With_Pollution.at[index, 'PM10'] = components['pm10']
                     Geographic_With_Pollution.at[index, 'NH3'] = components['nh3']
-    output_path = os.path.join(base_dir, '../data/raw/Pollution_wth_demographic.csv')
+    output_path = os.path.join(base_dir, '../data/raw/Pollution_With_Demographic.csv')
     Geographic_With_Pollution.to_csv(output_path, index=False)
 
 def merge_pollution_to_geographic():
@@ -78,5 +78,5 @@ def merge_pollution_to_geographic():
                     Geographic_With_Pollution.at[index, 'PM2_5'] = components['pm2_5']
                     Geographic_With_Pollution.at[index, 'PM10'] = components['pm10']
                     Geographic_With_Pollution.at[index, 'NH3'] = components['nh3']
-    output_path = os.path.join(base_dir, '../data/raw/Pollution_wth_geographic.csv')
+    output_path = os.path.join(base_dir, '../data/raw/Pollution_With_Geographic.csv')
     Geographic_With_Pollution.to_csv(output_path, index=False)

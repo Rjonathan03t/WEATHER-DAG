@@ -21,7 +21,7 @@ dag = DAG(
     'weather',
     default_args=default_args,
     description='daily weather data',
-    schedule_interval='@daily',
+    schedule_interval='@hourly',
     start_date=days_ago(1),
     catchup=False,
 )
