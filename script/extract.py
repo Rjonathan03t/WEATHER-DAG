@@ -18,7 +18,6 @@ def get_air_pollution_data(lat, lon):
     return response.json()
 
 def extract_data():
-    # Définir le chemin relatif basé sur le répertoire du script
     base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, '../data/raw/Geographic_Data.csv')
     return pd.read_csv(file_path)
