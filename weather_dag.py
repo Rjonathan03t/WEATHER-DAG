@@ -8,6 +8,8 @@ from script.extract import extract_demographic
 from script.extract import extract_geographic
 from script.transform import merge_pollution_to_demographic
 from script.transform import merge_pollution_to_geographic
+from script.transform import merge_pollution_to_demographic_sql
+from script.transform import merge_pollution_to_geographic_sql
 from script.load import load_data
 
 default_args = {
@@ -42,15 +44,28 @@ with TaskGroup("extract_tasks", dag=dag) as extract_tasks:
 
 with TaskGroup("transformation_tasks" , dag=dag) as transformation_tasks:
     merge_pollution_to_geographic = PythonOperator(
-    task_id='merge_pollution_to_geographic',
-    python_callable=merge_pollution_to_geographic,
-    dag=dag,
-)
-    merge_pollution_to_demographic = PythonOperator(
-        task_id='merge_pollution_to_demographic',
-        python_callable=merge_pollution_to_demographic,
-        dag=dag
+       task_id='merge_pollution_to_geographic',
+       python_callable=merge_pollution_to_geographic,
+       dag=dag,
     )
+    merge_pollution_to_demographic = PythonOperator(
+       task_id='merge_pollution_to_demographic',
+       python_callable=merge_pollution_to_demographic,
+       dag=dag
+    )
+
+    merge_pollution_to_demographic_sql = PythonOperator(
+       task_id='merge_pollution_to_demographic_sql',
+       python_callable=merge_pollution_to_demographic_sql,
+       dag=dag
+    )
+
+    merge_pollution_to_geographic_sql = PythonOperator(
+       task_id='merge_pollution_to_geographic_sql',
+       python_callable=merge_pollution_to_geographic_sql,
+       dag=dag
+    )
+
 
 
 load_task = PythonOperator(
