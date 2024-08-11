@@ -69,4 +69,21 @@ Accédez à l'interface web d'Airflow  à l'adresse:
      http://localhost:8080
 et déclenchez les DAGs appropriés.
 
+
+###Documentation
+
+Pour des détails supplémentaires sur le développement et l'utilisation du projet, consultez la documentation fournie dans le repository
+
+    [https://github.com/Rjonathan03t/WEATHER-DAG/blob/main/AIR%20POLLUTION.pdf].
+
+Veuillez consulter le lien suivant pour voir le tableau de bord:
+
+    https://lookerstudio.google.com/u/1/reporting/3d76ec8b-618a-4fd4-bc56-c2b07a60f3ff/page/p_wcad8vpzjd/edit
+
+###Contributeurs
+
+    Toky - STD 22105
+    Jonathan - STD 22106
+    Rojo Tiana - STD 22107
+
     
