@@ -36,4 +36,37 @@ Créez un fichier requirements.txt avec le contenu suivant :
     matplotlib
 
 Installez les dépendances avec :
+
     pip install -r requirements.txt
+
+#Lancer le Programme
+
+Exécuter le Script de Collecte
+Le script récupère les données de pollution et les stocke en fichiers CSV locaux.
+
+    python extract.py
+
+#Configurer et Lancer Apache Airflow
+
+Initialiser la Base de Données Airflow
+bash
+
+    airflow db init
+
+Démarrer le Scheduler et le Web Server Airflow:
+
+    airflow scheduler
+    airflow webserver
+
+Ou tapez juste:
+
+    airflow standalone
+
+#Planifier les Tâches avec Airflow
+
+Accédez à l'interface web d'Airflow  à l'adresse:
+
+     http://localhost:8080
+et déclenchez les DAGs appropriés.
+
+    
