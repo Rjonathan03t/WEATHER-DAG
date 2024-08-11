@@ -82,8 +82,8 @@ Veuillez consulter le lien suivant pour voir le tableau de bord:
 
 ###Contributeurs
 
-    Toky - STD 22105
-    Jonathan - STD 22106
+    Jonathan - STD 22105
+    Toky - STD 22106
     Rojo Tiana - STD 22107
 
     
